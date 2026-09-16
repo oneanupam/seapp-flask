@@ -4,33 +4,39 @@ This repository contains Example App written in python programming language usin
 ## Prerequisites
 Below prerequisites must be fulfilled for successful execution of code.
 
-### Software Requirement
-Resources in this repository are meant for use with Python 3.x (check the version using `python3 --version`) and pip3 (check the version using `pip3 --version`). If you don't have the compatible version, download it from official python repository.
+### Software Requirements
 
-- [python3](https://www.python.org/downloads/) >= 3.10.14
-- [pip3](https://pypi.org/project/pip/) >= 23.0.1
+Install the required tools before contributing to this project:
 
-### Bootstrap Virtual Environment
-It is a best practice to create a virtual environment for your application to avoid any conflict in dependencies between multiple applications. Hence, it is recommended to create a virtual environment (using python's default package "venv" or of your choice) and install all the dependencies. Follow below according to your operating system.
+- [Python 3](https://www.python.org/downloads/) >= 3.14.6
+- [pip](https://pypi.org/project/pip/) >= 26.1.2
+- [pre-commit](https://pre-commit.com/) >= 4.2.0
 
 ```bash
-# Linux OS:
-python3 -m venv example-app-venv
-source example-app-venv/bin/activate
+python -m pip install --upgrade pip
+```
+
+> [!NOTE]
+> To confirm your environment, run `python3 --version` or `python --version`, and `pip3 --version` or `pip --version`. See the [Python download page](https://www.python.org/downloads/) for installation instructions.
+
+### Set Up a Virtual Environment
+
+It is recommended to create an isolated virtual environment for this project to avoid dependency conflicts with other Python projects.
+
+```bash
+# Linux / macOS
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
-# Windows OS:
-python -m venv example-app-venv
-example-app-venv\Scripts\activate
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 > [!NOTE]
-> Activation makes the virtual environment the default Python interpreter for the duration of a shell session. Because, This will prepend that directory to your PATH, so that running python will invoke the virtual environment’s Python interpreter. As an indication of virtual environment activation, current shell prompt will prepend the name of the virtual environment you are currently using.
->
-> To deactivate the environment, simply type `deactivate` and you will return to your normal shell.
->
-> Within the virtual environment, you can use the command `pip` instead of `pip3` and `python` instead of `python3`.
+> Activating the virtual environment updates your shell PATH so `python` and `pip` point to the environment for the current session. To leave the environment, run `deactivate`.
 
 ## Run and Test the App on Local Machine
 Flask has the built-in Werkzeug server. To start the default dev web server of the app, execute the below command -
@@ -90,6 +96,36 @@ docker run -d -P --name eapp-container eapp:latest
 > ( . ) tells about the build context. The build context is the current directory (.), which should contain your application code and the Dockerfile. Pass the Dockerfile, if its name is not exactly Dockerfile.
 >
 > Port mapping is used to access the services running inside a Docker container. In the above case, we can now access the application using port 5000 on the host machine.
+
+## Run pre-commit
+This repository already includes a `.pre-commit-config.yaml`. Run the following commands to install the hooks locally:
+
+```bash
+python -m pip install pre-commit
+pre-commit install
+pre-commit validate-config
+```
+
+This installs the hook into `.git/hooks/pre-commit`. Once installed, pre-commit runs automatically when you commit changes. By default, it checks only the files included in the commit.
+
+To run all hooks manually, use:
+
+```bash
+pre-commit run --all-files
+pre-commit run <hook_id>
+```
+
+## Contributing
+
+Contributions and suggestions are welcome. Before opening an issue or pull request:
+
+1. Review the [contribution guidelines](CONTRIBUTING.md).
+2. Install the pre-commit hooks and run them against your changes.
+3. Open an issue for bugs or ideas, or submit a pull request with a clear description of the change.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## References
 - https://www.warp.dev/terminus/docker-logs-tail
